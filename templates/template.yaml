@@ -5,14 +5,14 @@ Parameters:
     Type: String
 
 Resources:
-  octankNewsAlexaLambda:
+  octankNewsTranslateLambda:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: octankNewsAlexaLambda
-      Description: Return
-      Handler: index.handler
-      CodeUri: ./index.js
-      Runtime: nodejs10.x
+      FunctionName: octankNewsTranslateLambda
+      Description: Process text to speach and translation of news articles.
+      Handler: index.go
+      CodeUri: ./main.py
+      Runtime: python3.7
       MemorySize: 128
       Timeout: 10
       Role: !Ref ROLE
