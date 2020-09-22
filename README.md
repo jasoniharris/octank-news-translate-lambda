@@ -1,0 +1,1 @@
+octank-news-translate-lambda
