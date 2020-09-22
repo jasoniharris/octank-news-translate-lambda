@@ -1,0 +1,36 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Supporting infrastructure for the Alexa Lambda. Demonstrate a basic fact skill built with the ASK NodeJS SDK",
+    "Resources": {
+        "alexaskillskitnodejsfactskillRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": [
+                                "sts:AssumeRole"
+                            ],
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                ],
+                "Tags": [
+                    {
+                        "Value": "SAM",
+                        "Key": "lambda:createdBy"
+                    }
+                ]
+            }
+        }
+    }
+}

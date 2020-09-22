@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  ROLE:
+    Type: String
+
+Resources:
+  octankNewsAlexaLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: octankNewsAlexaLambda
+      Description: Return
+      Handler: index.handler
+      CodeUri: ./index.js
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 10
+      Role: !Ref ROLE
+      Environment:
+        Variables:
+          BUCK_SRC: "content-production-octank-news"
+          BUCK_TAR: "octank-news"
+          VOICE_FR: "Celine"
+          VOICE_EN: "Hello, this is a news announcement from Octank News. "
+          INTRO_FR: "Bonjour, ceci est une annonce de nouvelles d'Octank News. "
+          OUTPUT_PATH_AUDIO: "audio/<LANG>/headline_<FILE>.mp3"
+          OUTPUT_PATH_JSON: "content/<LANG>/headline_<FILE>.json"

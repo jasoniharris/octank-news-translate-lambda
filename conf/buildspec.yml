@@ -1,0 +1,17 @@
+version: 0.2
+
+env:
+  exported-variables:
+      - branch
+phases:
+  build:
+    commands:
+      - echo "Running Build Script..."
+      - |-
+          echo "Branch is master"
+          echo "Stack name is ${stack}"
+          echo "Validate lambda function syntax..."
+          python -m py_compile main.py
+          echo "Deploy lambda function..."
+          chmod +x deploy.sh
+          ./deploy.sh

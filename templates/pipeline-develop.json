@@ -1,0 +1,74 @@
+{
+    "pipeline": {
+        "name": "octank-news-alexa-lambda-pipeline-develop",
+        "roleArn": "arn:aws:iam::089650354027:role/service-role/octank-news-infra-pipeline-service-role",
+        "artifactStore": {
+            "type": "S3",
+            "location": "codepipeline-eu-west-2-60367523907"
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "ThirdParty",
+                            "provider": "GitHub",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "Branch": "develop",
+                            "OAuthToken": "171274f9c4c700dcfb2e5d0f257685458c95a36f",
+                            "Owner": "jasoniharris",
+                            "PollForSourceChanges": "false",
+                            "Repo": "octank-news-alexa-lambda"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [],
+                        "region": "eu-west-2",
+                        "namespace": "SourceVariables"
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                    {
+                        "name": "Build",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "EnvironmentVariables": "[{\"name\":\"branch\",\"value\":\"develop\",\"type\":\"PLAINTEXT\"}]",
+                            "ProjectName": "octank-news-codebuild-project"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "BuildArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "eu-west-2",
+                        "namespace": "BuildVariables"
+                    }
+                ]
+            }
+        ],
+        "version": 1
+    }
+}
