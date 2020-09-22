@@ -11,7 +11,7 @@ Resources:
       FunctionName: octankNewsTranslateLambda
       Description: Process text to speach and translation of news articles.
       Handler: index.go
-      CodeUri: ./main.py
+      CodeUri: ./index.py
       Runtime: python3.7
       MemorySize: 128
       Timeout: 10
